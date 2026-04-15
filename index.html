@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partecipazione Matrimonio – Antonello & Carmela</title>
+<title>Partecipazione Matrimonio – Francesco & Erica</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body {
   overflow-x: hidden;
+  background-color: #f4f1ee;
 }
 
 /* ================= BUSTA E OMBRE ================= */
@@ -108,251 +106,183 @@ body {
   letter-spacing: 1px;
 }
 
-/* ================= INVITO E CONTENUTI ================= */
+/* ================= INVITO MONOPAGINA ================= */
 .invito {
   position: relative;
   min-height: 100vh;
   width: 100vw;
-  background-color: #f7f7f5;
+  /* Lo sfondo pulito senza scritte */
+  background: url('Images/sfondo.jpg') center bottom no-repeat;
+  background-size: cover;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 20px;
+  flex-direction: column;
+  justify-content: space-between; /* Spinge il testo in alto e i bottoni in basso */
+  align-items: center;
+  text-align: center;
   opacity: 0;
   transform: translateY(60px) scale(.96);
   transition: all 1.2s ease 1s;
-  overflow-x: hidden;
-  padding-bottom: 10vh;
+  overflow: hidden;
 }
 
-.contenuto {
-    position: relative;
-    z-index: 10;
-    max-width: 420px;
-    text-align: center;
-    color: #6f5f4f;
-    padding-top: 38vw;
-    padding-bottom: 0 !important;
-    margin-top: 10vh;
-}
-
-/* LA CARTA (sfondo2) */
+/* GRADIENTI DI RISALTO (Simili all'esempio) */
 .invito::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url('Images/sfondo2.jpg') center top repeat;
-    background-size: 101% auto;
-    z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 40%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 100%);
+  z-index: 1;
 }
 
-/* I FIORI IN ALTO */
 .invito::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: url('Images/sfondo.jpg') center top no-repeat;
-    background-size: 100% auto;
-    z-index: 2;
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 35%;
+  /* Sfuma verso il prato, dove andranno i bottoni */
+  background: linear-gradient(to top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0) 100%);
+  z-index: 1;
 }
 
 #envelope-container.opened + .invito{ opacity:1; transform:none; }
 
-@font-face {
-  font-family: 'Amelia Giovani';
-  src: url('Font/AmeliaGiovaniRegular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+/* BLOCCO SUPERIORE */
+.top-content {
+  position: relative;
+  z-index: 2;
+  margin-top: 15px;
 }
 
-.frase-accogliente {
+.header-text {
   font-family: 'Libre Baskerville', serif;
-  padding-top: 0 !important;
-  margin-bottom: 15px;
-  font-size: 15px;
-  color: #6f5f4f;
-  line-height: 1.2;
-}
-
-.frase-accogliente2 {
-  font-family: 'Amelia Giovani', serif;
-  font-weight: 450;
-  padding-top: 0 !important;
-  margin-bottom: 15px;
-  font-size: 40px;
-}
-
-@media (min-width: 768px) {
-  .invito {
-    background-size: cover; 
-  }
-  .contenuto {
-    padding-top: 250px;
-  }
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .nomi {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 8vw, 56px);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(40px, 12vw, 65px);
     margin-bottom: 25px;
-    line-height: 1.1;
+    line-height: 1;
     color: #8e7341;
-    letter-spacing: 5px;
 }
 
-/* ================= MODIFICA DATA (FIX PER MOBILE) ================= */
-.data-elegante {
-  margin: 30px 0 35px;
-  color: #8e7341;
-  text-align: center;
+.and-divider {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    margin: 10px 0;
+    color: #a6937c;
 }
 
-.data-riga {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* Tre colonne: sinistra, centro (numero), destra */
-  align-items: center;
-  column-gap: 5px; /* Spazio minimo di sicurezza */
-  width: 100%;
+/* DATA LAYOUT GRID (Riproduzione fedele) */
+.data-container {
+  margin: 15px 0;
+  color: #444;
 }
 
-.giorno,
-.mese {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.85;
-  
-  /* Flexbox per mantenere testo e linea allineati */
+.data-row {
   display: flex;
   align-items: center;
-  white-space: nowrap; /* Impedisce di andare a capo */
+  justify-content: center;
+  gap: 15px;
 }
 
-/* Allinea "Martedì -" verso destra (vicino al numero) */
-.giorno {
-  justify-content: flex-end;
-}
-
-/* Allinea "- Giugno" verso sinistra (vicino al numero) */
-.mese {
-  justify-content: flex-start;
-}
-
-.numero {
+.data-label {
   font-family: 'Libre Baskerville', serif;
-  font-size: 60px;
-  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  border-top: 1px solid #d6c3a3;
+  border-bottom: 1px solid #d6c3a3;
+  padding: 4px 0;
+  min-width: 90px;
+}
+
+.data-numero {
+  font-family: 'Playfair Display', serif;
+  font-size: 55px;
   line-height: 1;
-  padding: 0 5px; /* Un po' di respiro attorno al numero */
+  color: #8e7341;
 }
 
 .anno {
+  font-family: 'Libre Baskerville', serif;
   font-size: 18px;
-  letter-spacing: 3px;
-  margin-top: 6px;
-  opacity: 0.85;
+  letter-spacing: 5px;
+  margin-top: 5px;
 }
 
-.ora {
+.location {
   font-family: 'Libre Baskerville', serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1;
-  margin-bottom: 20px;
-}
-
-/* Linee (trattini) ridisegnate come blocchi flex */
-.giorno::after {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 1px;
-  background: #d6c3a3;
-  margin-left: 10px; /* Spazio tra Martedì e la linea */
-}
-
-.mese::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 1px;
-  background: #d6c3a3;
-  margin-right: 10px; /* Spazio tra la linea e Giugno */
-}
-/* ================= FINE MODIFICA DATA ================= */
-
-.btn-action {
-  display: inline-block;
-  padding: 16px 30px;
-  background-color: #6c9a8b; 
-  color:#ffffff;
-  text-decoration:none;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  border-radius: 50px; 
-  box-shadow: 0 4px 15px rgba(108, 154, 139, 0.4);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.btn-action:hover {
-  background-color: #557a6e;
-  transform: scale(1.05);
-}
-
-.restano-solo {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 20px;
-  color: #8e7341;
+  font-size: 18px;
+  color: #7a6341;
   margin-top: 10px;
-  letter-spacing: 1px;
+}
+
+/* BLOCCO INFERIORE (BOTTONI SUL PRATO ALLUNGATO) */
+.bottom-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  padding-bottom: 30px;
+  /* Lo spazio extra per i bottoni, allungando lo sfondo sfumato */
+  padding-top: 15vh; 
+}
+
+.btn-rsvp {
+  display: inline-block;
+  background-color: #fdfaf5; 
+  padding: 16px 40px;
+  border-radius: 50px; 
+  text-decoration: none;
+  border: 1.5px solid #d6c3a3;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13px;
+  color: #555;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
 }
 
 #countdown {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 15px 0 30px;
+  margin-bottom: 25px;
 }
 
-.cd-item { 
-    text-align: center; 
-    font-family: 'Libre Baskerville', serif;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.cd-item { text-align: center; color: #444; }
+.cd-number { display: block; font-size: 24px; font-weight: 600; border-bottom: 1.5px solid #d6c3a3; padding-bottom: 3px; }
+.cd-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  background-color: #5d7c6b; 
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  border-radius: 30px; 
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(93, 124, 107, 0.4);
 }
 
-.cd-number { display: block; font-size: 20px !important; font-weight: 500; color: #8e7341; }
-.cd-label { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-
-.location{ 
-  font-size:18px; line-height:1.6; margin-bottom:10px; 
-  font-family: 'Libre Baskerville', serif;
-}
-.maps a{ display:inline-block; margin:15px 0 30px; font-size:24px; text-decoration:none; }
-
-.msg-conferma {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 15px;
-  color: #6f5f4f;
-  margin-top: 20px;
-  line-height: 1.2;
-  margin-bottom: 20vh;
-  padding-bottom: 6vh;
-}
-
-.invito, .contenuto {
-    overflow: visible !important;
+/* Area vuota centrale (per i soggetti) */
+.middle-spacer {
+    flex-grow: 1;
+    min-height: 25vh;
 }
 
 /* EFFETTO PARTICELLE */
@@ -362,28 +292,6 @@ body {
   height: 6px;
   z-index: 150; 
   pointer-events: none;
-  border-radius: 2px;
-}
-
-.fiori-finale {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60vh; 
-    background: url('Images/sfondo.jpg') center top no-repeat;
-    background-size: 100% auto; 
-    z-index: 2;
-    transform: scaleY(-1);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 50%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 50%);
-    pointer-events: none;
-}
-
-@media (min-width: 768px) {
-    .fiori-finale {
-        background-size: cover;
-    }
 }
 
 </style>
@@ -399,85 +307,91 @@ body {
       <img src="Images/sigilloDoratoTest.png" alt="Sigillo">
       <svg class="curved-text-svg" viewBox="0 0 200 200">
         <defs><path id="curvePath" d="M 35,125 A 65,65 0 0,0 165,125" /></defs>
-        <text><textPath xlink:href="#curvePath" startOffset="50%" text-anchor="middle">Clicca qui per aprire</textPath></text>
+        <text><textPath xlink:href="#curvePath" startOffset="50%" text-anchor="middle">Clicca per aprire</textPath></text>
       </svg>
     </div>
   </div>
 </div>
 
 <section class="invito">
-  <div class="contenuto">
-    <div class="frase-accogliente">Con gioia <br>vi invitiamo a partecipare</div></br>
+  <div class="top-content">
+    <div class="header-text">Con gioia vi invitiamo a partecipare al matrimonio di</div>
     
-    <div class="frase-accogliente2"> the Wedding of:</div> 
+    <div class="nomi">
+      Erica Di Cianni
+      <span class="and-divider">
+        <br>— & —<br></span>
+      Francesco Marchione
+    </div>
 
-    <br> <div class="nomi">CARMELA MASTROIANNI<br>&<br>ANTONELLO MASALA</div>
-
-    <div class="data-elegante">
-      <div class="data-riga">
-        <div class="giorno">Martedì</div>
-        <div class="numero">23</div>
-        <div class="mese">Giugno</div>
+    <div class="data-container">
+      <div class="data-row">
+        <div class="data-label">Sabato</div>
+        <div class="data-numero">29</div>
+        <div class="data-label">Giugno</div>
       </div>
       <div class="anno">2026</div>
-      <br>
-      <div class="ora">Ore 17:30</div>
     </div>
-    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Antonello+e+Carmela&dates=20260623T153000Z/20260623T220000Z&location=Tenuta+Klopé" target="_blank" class="btn-action">📅 Aggiungi al calendario</a>
 
-    <div class="restano-solo">Restano solo:</div>
-    <div id="countdown">
-      <div class="cd-item"><span class="cd-number" id="days">00</span><span class="cd-label">Giorni</span></div>
-      <div class="cd-item"><span class="cd-number" id="hours">00</span><span class="cd-label">Ore</span></div>
-      <div class="cd-item"><span class="cd-number" id="mins">00</span><span class="cd-label">Min</span></div>
-      <div class="cd-item"><span class="cd-number" id="secs">00</span><span class="cd-label">Sec</span></div>
-    </div>
-  </br>
-    <div class="location">
-      <strong>Tenuta Klopé</strong><br>
-      Calabria
-    </div>
-    <div class="maps"><a href="https://maps.app.goo.gl/mpFc2jdsXFhVbtHX7" target="_blank">📍</a></div>
-    
-    <div class="rsvp">
-        <a href="https://forms.gle/vvSUfkJgjrLGJP8o8" target="_blank" class="btn-action">CONFERMA PRESENZA</a>
-        <div class="msg-conferma">È gradita conferma di partecipazione<br>entro il giorno 30 Aprile 2026</div>
-    </div>
+    <div class="location">Tenuta Balzano</div>
   </div>
-  <div class="fiori-finale"></div>
+
+  <div class="middle-spacer"></div>
+<br><br><br><br><br><br><br><br>
+  <div class="bottom-content">
+    <a href="https://forms.gle/vostra-url-conferma" target="_blank" class="btn-rsvp">Conferma Partecipazione</a>
+
+    <div id="countdown">
+      <div class="cd-item"><span class="cd-number" id="days">00</span><span class="cd-label">DAYS</span></div>
+      <div class="cd-item"><span class="cd-number" id="hours">00</span><span class="cd-label">HOURS</span></div>
+      <div class="cd-item"><span class="cd-number" id="mins">00</span><span class="cd-label">MIN</span></div>
+      <div class="cd-item"><span class="cd-number" id="secs">00</span><span class="cd-label">SEC</span></div>
+    </div>
+
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Francesco+e+Erica&dates=20240629T153000Z/20240629T230000Z&location=Tenuta+Balzano" target="_blank" class="btn-action">
+      📅 Aggiungi al calendario
+    </a>
+  </div>
 </section>
 
 <script>
-const targetDate = new Date("June 23, 2026 17:30:00").getTime();
+// Data corretta (29 Giugno 2024)
+const targetDate = new Date("June 29, 2026 17:30:00").getTime();
+
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
-  document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+  
+  // Se la data è passata, mostra zero
+  if (diff < 0) {
+    document.getElementById('days').innerText = "00";
+    document.getElementById('hours').innerText = "00";
+    document.getElementById('mins').innerText = "00";
+    document.getElementById('secs').innerText = "00";
+    return;
+  }
+
+  document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+  document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+  document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+  document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
 }, 1000);
 
 function createConfetti() {
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 50; i++) {
     const c = document.createElement('div');
     c.className = 'confetti';
     c.style.left = Math.random() * 100 + 'vw';
     c.style.top = '-10px';
-    const colors = ['#d4af37', '#f5deb3', '#e6be8a', '#c5a059'];
-    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    c.style.backgroundColor = ['#d4af37', '#f5deb3', '#d6c3a3'][Math.floor(Math.random()*3)];
     document.body.appendChild(c);
 
-    const duration = 2000 + Math.random() * 3000;
     const rotation = Math.random() * 360;
 
     c.animate([
       { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
       { transform: `translateY(100vh) rotate(${rotation}deg)`, opacity: 0 }
-    ], { 
-      duration: duration, 
-      easing: 'cubic-bezier(.25, .46, .45, .94)' 
-    }).onfinish = () => c.remove();
+    ], { duration: 3000 + Math.random()*2000, easing: 'ease-out' }).onfinish = () => c.remove();
   }
 }
 
@@ -498,10 +412,10 @@ document.getElementById('wax-seal').addEventListener('click',()=>{
   }, 2200);
 });
 
+// Mostra il testo curvo quando i font sono pronti
 document.fonts.ready.then(() => {
   document.querySelector('.curved-text-svg').style.opacity = '1';
 });
-
 </script>
 
 </body>
