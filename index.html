@@ -17,133 +17,84 @@ body {
   background-color: #f4f1ee;
 }
 
-/* ================= BUSTA E OMBRE ================= */
-#envelope-container{
-  position:fixed;
-  inset:0;
-  background:#ffffff; 
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:100;
-  transition: opacity 1.2s ease;
-}
-
-.envelope{
-  position:relative;
-  width:100vw;
-  height:100vh;
-  display:flex;
-  overflow: hidden;
-}
-
-.envelope-left,
-.envelope-right{
-  height:100%;
-  background:#ffffff;
-  transition: transform 1.8s cubic-bezier(.645, .045, .355, 1);
-}
-
-.envelope-left {
-  width: 50%;
-  z-index: 1;
-  border-right: 1px solid #eeeeee;
-}
-
-.envelope-right {
-  width: 51%; 
-  margin-left: -1%; 
-  z-index: 2;
-  box-shadow: -25px 0 50px rgba(0,0,0,0.2), -10px 0 15px rgba(0,0,0,0.1); 
-  border-left: 1px solid rgba(0,0,0,0.05);
-}
-
-.opened .envelope-left { transform: translateX(-100%); }
-.opened .envelope-right { transform: translateX(100%); }
-
-/* ================= SIGILLO PULSANTE ================= */
-@keyframes pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.05); }
-}
-
-#wax-seal{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:110;
-  cursor:pointer;
-  width: 300px;
-  height: 300px;
+/* ================= NUOVA APERTURA VERTICALE ================= */
+#envelope-container {
+  position: fixed;
+  inset: 0;
+  background: #ffffff; 
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: pulse 2.5s infinite ease-in-out;
-  -webkit-tap-highlight-color: transparent;
+  z-index: 100;
+  transition: opacity 1.2s ease;
 }
 
-#wax-seal img {
-  position: absolute;
-  width: 160px; 
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
-  pointer-events: none;
-}
-
-.curved-text-svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.curved-text-svg text {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 15px;
-  fill: #8e7341;
-  letter-spacing: 1px;
-}
-
-/* ================= INVITO MONOPAGINA ================= */
-.invito {
+.envelope {
   position: relative;
-  min-height: 100vh;
   width: 100vw;
-  /* Lo sfondo pulito senza scritte */
-  background: url('Images/sfondo.jpg') center bottom no-repeat;
-  background-size: cover;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Spinge il testo in alto e i bottoni in basso */
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(60px) scale(.96);
-  transition: all 1.2s ease 1s;
+  flex-direction: column; /* Cambiato in colonna per apertura verticale */
   overflow: hidden;
 }
 
-/* GRADIENTI DI RISALTO (Simili all'esempio) */
-.invito::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 40%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 100%);
-  z-index: 1;
+.envelope-top,
+.envelope-bottom {
+  width: 100%;
+  height: 50%;
+  background: #ffffff;
+  transition: transform 1.5s cubic-bezier(.645, .045, .355, 1), opacity 1.2s ease;
+  z-index: 2;
 }
 
-.invito::after {
-  content: "";
-  position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 35%;
-  /* Sfuma verso il prato, dove andranno i bottoni */
-  background: linear-gradient(to top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0) 100%);
-  z-index: 1;
+.envelope-top {
+  border-bottom: 1px solid #eeeeee;
 }
 
-#envelope-container.opened + .invito{ opacity:1; transform:none; }
+.envelope-bottom {
+  box-shadow: 0 -15px 30px rgba(0,0,0,0.05);
+}
+
+/* Animazione di uscita */
+.opened .envelope-top { transform: translateY(-100%); opacity: 0; }
+.opened .envelope-bottom { transform: translateY(100%); opacity: 0; }
+
+#wax-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 110;
+  width: 150px;
+  cursor: pointer;
+  transition: all 0.8s ease;
+}
+
+#wax-seal img {
+  width: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+.opened #wax-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
+
+/* ================= INVITO (INALTERATO) ================= */
+.invito {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: url('Images/sfondo.jpg') center center no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.5s ease 0.8s;
+  overflow: hidden;
+}
+
+#envelope-container.opened + .invito { opacity: 1; }
 
 /* BLOCCO SUPERIORE */
 .top-content {
@@ -153,6 +104,7 @@ body {
 }
 
 .header-text {
+  padding-top: 8vh;
   font-family: 'Libre Baskerville', serif;
   font-size: 14px;
   color: #555;
@@ -198,94 +150,79 @@ body {
   border-top: 1px solid #d6c3a3;
   border-bottom: 1px solid #d6c3a3;
   padding: 4px 0;
-  min-width: 90px;
+  min-width: 80px;
 }
 
 .data-numero {
   font-family: 'Playfair Display', serif;
-  font-size: 55px;
-  line-height: 1;
+  font-size: 45px;
   color: #8e7341;
+  line-height: 1;
 }
 
 .anno {
   font-family: 'Libre Baskerville', serif;
-  font-size: 18px;
-  letter-spacing: 5px;
+  font-size: 16px;
+  letter-spacing: 4px;
   margin-top: 5px;
 }
 
-.location {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 18px;
-  color: #7a6341;
-  margin-top: 10px;
+.middle-spacer {
+    flex-grow: 1;
+    flex-basis: 40%;
 }
 
-/* BLOCCO INFERIORE (BOTTONI SUL PRATO ALLUNGATO) */
 .bottom-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 480px;
-  padding-bottom: 30px;
-  /* Lo spazio extra per i bottoni, allungando lo sfondo sfumato */
-  padding-top: 15vh; 
+  padding-bottom: 5vh;
 }
 
 .btn-rsvp {
   display: inline-block;
   background-color: #fdfaf5; 
-  padding: 16px 40px;
+  padding: 15px 35px;
   border-radius: 50px; 
   text-decoration: none;
   border: 1.5px solid #d6c3a3;
   font-family: 'Libre Baskerville', serif;
-  font-size: 13px;
+  font-size: 12px;
   color: #555;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  margin-bottom: 25px;
-  transition: all 0.3s ease;
+  margin-bottom: 20px;
 }
 
 #countdown {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
-.cd-item { text-align: center; color: #444; }
-.cd-number { display: block; font-size: 24px; font-weight: 600; border-bottom: 1.5px solid #d6c3a3; padding-bottom: 3px; }
-.cd-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
+.cd-number { display: block; font-size: 22px; font-weight: 600; color: #444; border-bottom: 1.5px solid #d6c3a3; }
+.cd-label { font-size: 8px; text-transform: uppercase; color: #666; }
 
-.btn-action {
+.btn-calendar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 25px;
-  background-color: #5d7c6b; 
-  color: #ffffff;
+  padding: 10px 20px;
+  background-color: #5d7c6b;
+  color: white;
+  border-radius: 30px;
   text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  border-radius: 30px; 
+  font-family: 'Libre Baskerville', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: bold;
   text-transform: uppercase;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(93, 124, 107, 0.4);
+  margin-bottom: 10px;
 }
 
-/* Area vuota centrale (per i soggetti) */
-.middle-spacer {
-    flex-grow: 1;
-    min-height: 25vh;
-}
-
-/* EFFETTO PARTICELLE */
 .confetti {
   position: fixed;
   width: 6px;
@@ -293,7 +230,6 @@ body {
   z-index: 150; 
   pointer-events: none;
 }
-
 </style>
 </head>
 
@@ -301,14 +237,10 @@ body {
 
 <div id="envelope-container">
   <div class="envelope" id="envelope">
-    <div class="envelope-left"></div>
-    <div class="envelope-right"></div>
+    <div class="envelope-top"></div>
+    <div class="envelope-bottom"></div>
     <div id="wax-seal">
       <img src="Images/sigilloDoratoTest.png" alt="Sigillo">
-      <svg class="curved-text-svg" viewBox="0 0 200 200">
-        <defs><path id="curvePath" d="M 35,125 A 65,65 0 0,0 165,125" /></defs>
-        <text><textPath xlink:href="#curvePath" startOffset="50%" text-anchor="middle">Clicca per aprire</textPath></text>
-      </svg>
     </div>
   </div>
 </div>
@@ -316,65 +248,69 @@ body {
 <section class="invito">
   <div class="top-content">
     <div class="header-text">Con gioia vi invitiamo a partecipare al matrimonio di</div>
-    
+
     <div class="nomi">
       Erica Di Cianni
       <span class="and-divider">
         <br>— & —<br></span>
       Francesco Marchione
     </div>
-
+    
     <div class="data-container">
       <div class="data-row">
-        <div class="data-label">Sabato</div>
-        <div class="data-numero">29</div>
-        <div class="data-label">Giugno</div>
+        <div class="data-label">Domenica</div>
+        <div class="data-numero">30</div>
+        <div class="data-label">Agosto</div>
       </div>
       <div class="anno">2026</div>
     </div>
-
-    <div class="location">Tenuta Balzano</div>
   </div>
 
   <div class="middle-spacer"></div>
-<br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
   <div class="bottom-content">
-    <a href="https://forms.gle/vostra-url-conferma" target="_blank" class="btn-rsvp">Conferma Partecipazione</a>
+    <a href="https://forms.gle/vostro-link" target="_blank" class="btn-rsvp">Conferma Partecipazione</a>
 
     <div id="countdown">
-      <div class="cd-item"><span class="cd-number" id="days">00</span><span class="cd-label">DAYS</span></div>
-      <div class="cd-item"><span class="cd-number" id="hours">00</span><span class="cd-label">HOURS</span></div>
-      <div class="cd-item"><span class="cd-number" id="mins">00</span><span class="cd-label">MIN</span></div>
-      <div class="cd-item"><span class="cd-number" id="secs">00</span><span class="cd-label">SEC</span></div>
+      <div class="cd-item"><span class="cd-number" id="days">00</span><span class="cd-label">Giorni</span></div>
+      <div class="cd-item"><span class="cd-number" id="hours">00</span><span class="cd-label">Ore</span></div>
+      <div class="cd-item"><span class="cd-number" id="mins">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-item"><span class="cd-number" id="secs">00</span><span class="cd-label">Sec</span></div>
     </div>
 
-    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Francesco+e+Erica&dates=20240629T153000Z/20240629T230000Z&location=Tenuta+Balzano" target="_blank" class="btn-action">
-      📅 Aggiungi al calendario
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Francesco+e+Erica&dates=20260629T153000Z/20260629T230000Z&location=Tenuta+Balzano" target="_blank" class="btn-calendar">
+      📅 Aggiungi al Calendario
     </a>
   </div>
 </section>
 
 <script>
-// Data corretta (29 Giugno 2024)
-const targetDate = new Date("June 29, 2026 17:30:00").getTime();
+// Gestione apertura al click sul sigillo
+document.getElementById('wax-seal').addEventListener('click', () => {
+  const container = document.getElementById('envelope-container');
+  document.getElementById('envelope').classList.add('opened');
+  container.classList.add('opened');
+  
+  setTimeout(createConfetti, 500);
 
+  // Rimuove il contenitore per permettere l'interazione con l'invito
+  setTimeout(() => {
+    container.style.opacity = '0';
+    setTimeout(() => { container.style.display = 'none'; }, 1200);
+  }, 2000);
+});
+
+// Countdown
+const targetDate = new Date("August 30, 2026 16:30:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
-  
-  // Se la data è passata, mostra zero
-  if (diff < 0) {
-    document.getElementById('days').innerText = "00";
-    document.getElementById('hours').innerText = "00";
-    document.getElementById('mins').innerText = "00";
-    document.getElementById('secs').innerText = "00";
-    return;
+  if (diff > 0) {
+    document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
   }
-
-  document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-  document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-  document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-  document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
 }, 1000);
 
 function createConfetti() {
@@ -394,28 +330,6 @@ function createConfetti() {
     ], { duration: 3000 + Math.random()*2000, easing: 'ease-out' }).onfinish = () => c.remove();
   }
 }
-
-document.getElementById('wax-seal').addEventListener('click',()=>{
-  const container = document.getElementById('envelope-container');
-  document.getElementById('envelope').classList.add('opened');
-  container.classList.add('opened');
-  document.getElementById('wax-seal').style.display = 'none';
-  
-  setTimeout(createConfetti, 400);
-
-  setTimeout(()=>{
-    container.style.opacity = '0';
-    setTimeout(() => { 
-        container.style.display = 'none'; 
-        document.body.style.overflow='auto'; 
-    }, 1200);
-  }, 2200);
-});
-
-// Mostra il testo curvo quando i font sono pronti
-document.fonts.ready.then(() => {
-  document.querySelector('.curved-text-svg').style.opacity = '1';
-});
 </script>
 
 </body>
