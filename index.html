@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partecipazione Matrimonio – Antonello & Carmela</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ================= BUSTA E OMBRE ================= */
+#envelope-container{
+  position:fixed;
+  inset:0;
+  background:#ffffff; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+  transition: opacity 1.2s ease;
+}
+
+.envelope{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  overflow: hidden;
+}
+
+.envelope-left,
+.envelope-right{
+  height:100%;
+  background:#ffffff;
+  transition: transform 1.8s cubic-bezier(.645, .045, .355, 1);
+}
+
+.envelope-left {
+  width: 50%;
+  z-index: 1;
+  border-right: 1px solid #eeeeee;
+}
+
+.envelope-right {
+  width: 51%; 
+  margin-left: -1%; 
+  z-index: 2;
+  box-shadow: -25px 0 50px rgba(0,0,0,0.2), -10px 0 15px rgba(0,0,0,0.1); 
+  border-left: 1px solid rgba(0,0,0,0.05);
+}
+
+.opened .envelope-left { transform: translateX(-100%); }
+.opened .envelope-right { transform: translateX(100%); }
+
+/* ================= SIGILLO PULSANTE ================= */
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+#wax-seal{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:110;
+  cursor:pointer;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 2.5s infinite ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#wax-seal img {
+  position: absolute;
+  width: 160px; 
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+  pointer-events: none;
+}
+
+.curved-text-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.curved-text-svg text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  fill: #8e7341;
+  letter-spacing: 1px;
+}
+
+/* ================= INVITO E CONTENUTI ================= */
+.invito {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f7f7f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(60px) scale(.96);
+  transition: all 1.2s ease 1s;
+  overflow-x: hidden;
+  padding-bottom: 10vh;
+}
+
+.contenuto {
+    position: relative;
+    z-index: 10;
+    max-width: 420px;
+    text-align: center;
+    color: #6f5f4f;
+    padding-top: 38vw;
+    padding-bottom: 0 !important;
+    margin-top: 10vh;
+}
+
+/* LA CARTA (sfondo2) */
+.invito::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('Images/sfondo2.jpg') center top repeat;
+    background-size: 101% auto;
+    z-index: 1;
+}
+
+/* I FIORI IN ALTO */
+.invito::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('Images/sfondo.jpg') center top no-repeat;
+    background-size: 100% auto;
+    z-index: 2;
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    pointer-events: none;
+}
+
+#envelope-container.opened + .invito{ opacity:1; transform:none; }
+
+@font-face {
+  font-family: 'Amelia Giovani';
+  src: url('Font/AmeliaGiovaniRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.frase-accogliente {
+  font-family: 'Libre Baskerville', serif;
+  padding-top: 0 !important;
+  margin-bottom: 15px;
+  font-size: 15px;
+  color: #6f5f4f;
+  line-height: 1.2;
+}
+
+.frase-accogliente2 {
+  font-family: 'Amelia Giovani', serif;
+  font-weight: 450;
+  padding-top: 0 !important;
+  margin-bottom: 15px;
+  font-size: 40px;
+}
+
+@media (min-width: 768px) {
+  .invito {
+    background-size: cover; 
+  }
+  .contenuto {
+    padding-top: 250px;
+  }
+}
+
+.nomi {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 8vw, 56px);
+    margin-bottom: 25px;
+    line-height: 1.1;
+    color: #8e7341;
+    letter-spacing: 5px;
+}
+
+/* ================= MODIFICA DATA (FIX PER MOBILE) ================= */
+.data-elegante {
+  margin: 30px 0 35px;
+  color: #8e7341;
+  text-align: center;
+}
+
+.data-riga {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* Tre colonne: sinistra, centro (numero), destra */
+  align-items: center;
+  column-gap: 5px; /* Spazio minimo di sicurezza */
+  width: 100%;
+}
+
+.giorno,
+.mese {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  
+  /* Flexbox per mantenere testo e linea allineati */
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Impedisce di andare a capo */
+}
+
+/* Allinea "Martedì -" verso destra (vicino al numero) */
+.giorno {
+  justify-content: flex-end;
+}
+
+/* Allinea "- Giugno" verso sinistra (vicino al numero) */
+.mese {
+  justify-content: flex-start;
+}
+
+.numero {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0 5px; /* Un po' di respiro attorno al numero */
+}
+
+.anno {
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.ora {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+/* Linee (trattini) ridisegnate come blocchi flex */
+.giorno::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: #d6c3a3;
+  margin-left: 10px; /* Spazio tra Martedì e la linea */
+}
+
+.mese::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: #d6c3a3;
+  margin-right: 10px; /* Spazio tra la linea e Giugno */
+}
+/* ================= FINE MODIFICA DATA ================= */
+
+.btn-action {
+  display: inline-block;
+  padding: 16px 30px;
+  background-color: #6c9a8b; 
+  color:#ffffff;
+  text-decoration:none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  border-radius: 50px; 
+  box-shadow: 0 4px 15px rgba(108, 154, 139, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.btn-action:hover {
+  background-color: #557a6e;
+  transform: scale(1.05);
+}
+
+.restano-solo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px;
+  color: #8e7341;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0 30px;
+}
+
+.cd-item { 
+    text-align: center; 
+    font-family: 'Libre Baskerville', serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.cd-number { display: block; font-size: 20px !important; font-weight: 500; color: #8e7341; }
+.cd-label { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+.location{ 
+  font-size:18px; line-height:1.6; margin-bottom:10px; 
+  font-family: 'Libre Baskerville', serif;
+}
+.maps a{ display:inline-block; margin:15px 0 30px; font-size:24px; text-decoration:none; }
+
+.msg-conferma {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  color: #6f5f4f;
+  margin-top: 20px;
+  line-height: 1.2;
+  margin-bottom: 20vh;
+  padding-bottom: 6vh;
+}
+
+.invito, .contenuto {
+    overflow: visible !important;
+}
+
+/* EFFETTO PARTICELLE */
+.confetti {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  z-index: 150; 
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.fiori-finale {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh; 
+    background: url('Images/sfondo.jpg') center top no-repeat;
+    background-size: 100% auto; 
+    z-index: 2;
+    transform: scaleY(-1);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 50%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 50%);
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .fiori-finale {
+        background-size: cover;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="envelope-container">
+  <div class="envelope" id="envelope">
+    <div class="envelope-left"></div>
+    <div class="envelope-right"></div>
+    <div id="wax-seal">
+      <img src="Images/sigilloDoratoTest.png" alt="Sigillo">
+      <svg class="curved-text-svg" viewBox="0 0 200 200">
+        <defs><path id="curvePath" d="M 35,125 A 65,65 0 0,0 165,125" /></defs>
+        <text><textPath xlink:href="#curvePath" startOffset="50%" text-anchor="middle">Clicca qui per aprire</textPath></text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section class="invito">
+  <div class="contenuto">
+    <div class="frase-accogliente">Con gioia <br>vi invitiamo a partecipare</div></br>
+    
+    <div class="frase-accogliente2"> the Wedding of:</div> 
+
+    <br> <div class="nomi">CARMELA MASTROIANNI<br>&<br>ANTONELLO MASALA</div>
+
+    <div class="data-elegante">
+      <div class="data-riga">
+        <div class="giorno">Martedì</div>
+        <div class="numero">23</div>
+        <div class="mese">Giugno</div>
+      </div>
+      <div class="anno">2026</div>
+      <br>
+      <div class="ora">Ore 17:30</div>
+    </div>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Antonello+e+Carmela&dates=20260623T153000Z/20260623T220000Z&location=Tenuta+Klopé" target="_blank" class="btn-action">📅 Aggiungi al calendario</a>
+
+    <div class="restano-solo">Restano solo:</div>
+    <div id="countdown">
+      <div class="cd-item"><span class="cd-number" id="days">00</span><span class="cd-label">Giorni</span></div>
+      <div class="cd-item"><span class="cd-number" id="hours">00</span><span class="cd-label">Ore</span></div>
+      <div class="cd-item"><span class="cd-number" id="mins">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-item"><span class="cd-number" id="secs">00</span><span class="cd-label">Sec</span></div>
+    </div>
+  </br>
+    <div class="location">
+      <strong>Tenuta Klopé</strong><br>
+      Calabria
+    </div>
+    <div class="maps"><a href="https://maps.app.goo.gl/mpFc2jdsXFhVbtHX7" target="_blank">📍</a></div>
+    
+    <div class="rsvp">
+        <a href="https://forms.gle/vvSUfkJgjrLGJP8o8" target="_blank" class="btn-action">CONFERMA PRESENZA</a>
+        <div class="msg-conferma">È gradita conferma di partecipazione<br>entro il giorno 30 Aprile 2026</div>
+    </div>
+  </div>
+  <div class="fiori-finale"></div>
+</section>
+
+<script>
+const targetDate = new Date("June 23, 2026 17:30:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+  document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+}, 1000);
+
+function createConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '-10px';
+    const colors = ['#d4af37', '#f5deb3', '#e6be8a', '#c5a059'];
+    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(c);
+
+    const duration = 2000 + Math.random() * 3000;
+    const rotation = Math.random() * 360;
+
+    c.animate([
+      { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+      { transform: `translateY(100vh) rotate(${rotation}deg)`, opacity: 0 }
+    ], { 
+      duration: duration, 
+      easing: 'cubic-bezier(.25, .46, .45, .94)' 
+    }).onfinish = () => c.remove();
+  }
+}
+
+document.getElementById('wax-seal').addEventListener('click',()=>{
+  const container = document.getElementById('envelope-container');
+  document.getElementById('envelope').classList.add('opened');
+  container.classList.add('opened');
+  document.getElementById('wax-seal').style.display = 'none';
+  
+  setTimeout(createConfetti, 400);
+
+  setTimeout(()=>{
+    container.style.opacity = '0';
+    setTimeout(() => { 
+        container.style.display = 'none'; 
+        document.body.style.overflow='auto'; 
+    }, 1200);
+  }, 2200);
+});
+
+document.fonts.ready.then(() => {
+  document.querySelector('.curved-text-svg').style.opacity = '1';
+});
+
+</script>
+
+</body>
+</html>
