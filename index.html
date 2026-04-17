@@ -157,6 +157,7 @@ body {
   gap: 15px;
 }
 
+/* Centra perfettamente i due lati della data */
 .data-label {
   font-family: 'Libre Baskerville', serif;
   text-transform: uppercase;
@@ -165,7 +166,8 @@ body {
   border-top: 1px solid #d6c3a3;
   border-bottom: 1px solid #d6c3a3;
   padding: 4px 0;
-  min-width: 80px;
+  flex: 1; /* Forza le due etichette ad occupare lo stesso spazio */
+  text-align: center;
 }
 
 .data-numero {
@@ -175,11 +177,14 @@ body {
   line-height: 1;
 }
 
+/* Sistema il 2026 */
 .anno {
   font-family: 'Libre Baskerville', serif;
   font-size: 16px;
   letter-spacing: 4px;
-  margin-top: 5px;
+  margin-top: 10px;
+  text-indent: 4px; /* Compensa il letter-spacing per un centramento millimetrico */
+  display: block;
 }
 
 
