@@ -264,22 +264,24 @@ body {
 
 .location-text {
   font-family: 'Libre Baskerville', serif;
-  font-size: 12px;         /* Leggermente più piccolo ma... */
+  font-size: clamp(9px, 2.5vw, 12px);         /* Leggermente più piccolo ma... */
   text-transform: uppercase; /* ...in maiuscolo per dare importanza */
   letter-spacing: 2px;      /* Più respiro tra le lettere */
   font-weight: bold;
   margin-bottom: 8px;
   color: #555;
+  white-space: nowrap;
 }
 
 .ricevimento-text {
   /* font-family: 'Cormorant Garamond', serif; */
-  font-size: 15px;         /* Più grande per contrasto */
+  font-size: clamp(11px, 3.5vw, 15px);         /* Più grande per contrasto */
   font-style: italic;
   color: #8e7341;          /* Il colore dorato che già usi */
   margin-bottom: 1px;
   line-height: 1.2;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .maps-links {
