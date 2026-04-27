@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -101,8 +101,9 @@ body {
     flex-basis: 40%;
 }
 
+
 .bottom-content {
-  padding-top: 28vh; /* potrebbe essere necessario rimuoverlo */
+  padding-top: 25vh; /* Ridotto da 28vh a 5vh */
   position: relative;
   z-index: 2;
   width: 100%;
@@ -115,24 +116,26 @@ body {
 .top-content {
   position: relative;
   z-index: 2;
-  margin-top: 15px;
+  margin-top: -10px;
 }
 
 .header-text {
   padding-top: 3vh;
   font-family: 'Libre Baskerville', serif;
   /* font-family: 'Great Vibes', cursive; */
-  font-size: 14px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
   color: #555;
   margin-bottom: 20px;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  /* text-transform: uppercase;*/
 }
 
 .nomi {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(40px, 12vw, 65px);
-    margin-bottom: 25px;
+    font-size: clamp(40px, 12vw, 40px);
+    margin-bottom: 12px;
     line-height: 1;
     color: #8e7341;
 }
@@ -147,7 +150,7 @@ body {
 
 /* DATA LAYOUT GRID (Riproduzione fedele) */
 .data-container {
-  margin: 15px 0;
+  margin: 10px 0;
   color: #444;
 }
 
@@ -203,7 +206,7 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+  margin-bottom: 7px;
 }
 
 #countdown {
@@ -240,6 +243,69 @@ body {
   z-index: 150; 
   pointer-events: none;
 }
+
+.location-container {
+  margin-top: 30px;
+  color: #444;
+  padding: 0 15px;
+}
+
+.location-text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 12px;         /* Leggermente più piccolo ma... */
+  text-transform: uppercase; /* ...in maiuscolo per dare importanza */
+  letter-spacing: 2px;      /* Più respiro tra le lettere */
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.ricevimento-text {
+  /* font-family: 'Cormorant Garamond', serif; */
+  font-size: 15px;         /* Più grande per contrasto */
+  font-style: italic;
+  color: #8e7341;          /* Il colore dorato che già usi */
+  margin-bottom: 1px;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.maps-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.map-icon-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease;
+}
+
+.map-icon-link:active {
+  transform: scale(0.95);
+}
+
+.map-icon-link img {
+  width: 24px;   /* Icone un po' più piccole */
+  height: auto;
+  opacity: 0.6;  /* Più discrete */
+  filter: sepia(0.5); /* Le rende più intonate ai colori caldi del sito */
+}
+
+.map-icon-link span {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a6937c;
+}
+
+
 </style>
 </head>
 
@@ -258,23 +324,39 @@ body {
 <section class="invito">
   <div class="top-content">
     <div class="header-text">Save The Date</div>
+        <div class="nomi">
+          Erica Di Cianni
+          <span class="and-divider">
+            <br>— & —<br></span>
+          Francesco Marchione
+        </div>
+        
+        <div class="data-container">
+          <div class="data-row">
+            <div class="data-label">Domenica</div>
+            <div class="data-numero">30</div>
+            <div class="data-label">Agosto</div>
+          </div>
+          <div class="anno">2026</div>
+        </div>
 
-    <div class="nomi">
-      Erica Di Cianni
-      <span class="and-divider">
-        <br>— & —<br></span>
-      Francesco Marchione
-    </div>
-    
-    <div class="data-container">
-      <div class="data-row">
-        <div class="data-label">Domenica</div>
-        <div class="data-numero">30</div>
-        <div class="data-label">Agosto</div>
+        
+      <div class="location-container">
+        <p class="location-text">Chiesa di San Domenico • Ore 16:30</p>
+        <p class="ricevimento-text">A seguire il ricevimento presso Tenuta Balzano</p>
+        
+        <div class="maps-links">
+          <a href="https://maps.app.goo.gl/d2ueR8jP6oFRfWBc9" target="_blank" class="map-icon-link">
+            <img src="Images/church-location.png" alt="Mappa Chiesa">
+          </a>
+          <a href="https://maps.app.goo.gl/gyNhgyX9xvBRTss98" target="_blank" class="map-icon-link">
+            <img src="Images/restaurant-location.png" alt="Mappa Tenuta">
+            
+          </a>
+        </div>
       </div>
-      <div class="anno">2026</div>
-    </div>
-  </div>
+
+  </div> 
 
   <div class="middle-spacer"></div>
   <br><br><br><br><br>
