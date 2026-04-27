@@ -97,6 +97,8 @@ body {
   overflow-x: hidden; 
   padding: 5vh 0; /* Un leggero respiro sopra e sotto */
   box-sizing: border-box;
+  padding-top: 0vh;
+
 }
 
 
@@ -400,17 +402,17 @@ document.getElementById('wax-seal').addEventListener('click', () => {
 });
 
 // Countdown
-const targetDate = new Date("August 30, 2026 16:30:00").getTime();
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = targetDate - now;
-  if (diff > 0) {
-    document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-    document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-    document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-    document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-  }
-}, 1000);
+//const targetDate = new Date("August 30, 2026 16:30:00").getTime();
+//setInterval(() => {
+  //const now = new Date().getTime();
+  //const diff = targetDate - now;
+  //if (diff > 0) {
+   // document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    //document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    //document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    //document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+  //}
+//}, 1000);
 
 function createConfetti() {
   for (let i = 0; i < 50; i++) {
