@@ -78,34 +78,33 @@ body {
 .opened #wax-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
 
 /* ================= INVITO (INALTERATO) ================= */
+/* Modificato: background-position da "center center" a "center bottom" */
 .invito {
   position: relative;
-  /* Usa min-height e 100dvh (dynamic viewport height) per gestire bene la barra di navigazione degli smartphone */
   min-height: 100dvh; 
   width: 100vw;
-  background: url('Images/sfondo_edited.png') center center no-repeat;
+  /* Ancorando in basso, l'immagine taglierà l'eccesso di cielo in alto e non i piedi o la strada in basso */
+  background: url('Images/sfondo_edited.png') center bottom no-repeat; 
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Spinge i contenuti ai margini superiore e inferiore */
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   opacity: 0;
   transition: opacity 1.5s ease 0.8s;
-  
-  /* Rimuovi overflow: hidden; in modo che se lo schermo è minuscolo, si possa scorrere giù */
   overflow-x: hidden; 
-  padding: 5vh 0; /* Un leggero respiro sopra e sotto */
+  padding: 5vh 0; 
   box-sizing: border-box;
   padding-top: 0vh;
-
 }
 
 
+/* Modificato: aggiunto uno scudo molto più grande in altezza (38vh) */
 .middle-spacer {
-    /* flex-grow: 1 permetterà a questo spazio di espandersi automaticamente solo se c'è spazio sufficiente */
     flex-grow: 1; 
-    min-height: 20px; /* Spazio vitale minimo tra il blocco in alto e quello in basso */
+    /* Questo è il tuo "scudo" per gli sposi. Impedisce ai blocchi di schiacciarsi oltre questo limite */
+    min-height: 38vh; 
 }
 
 .bottom-content {
@@ -142,9 +141,11 @@ body {
   /* text-transform: uppercase;*/
 }
 
+/* Modificato: corretto il clamp() che prima aveva valori uguali, ora i font scalano davvero */
 .nomi {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(40px, 12vw, 40px);
+    /* Scala da un minimo di 30px a un massimo di 45px in base alla larghezza */
+    font-size: clamp(30px, 9vw, 45px); 
     margin-bottom: 12px;
     line-height: 1;
     color: #8e7341;
@@ -184,9 +185,10 @@ body {
   text-align: center;
 }
 
+/* Modificato: reso fluido anche il numero della data */
 .data-numero {
   font-family: 'Playfair Display', serif;
-  font-size: 45px;
+  font-size: clamp(35px, 8vw, 45px);
   color: #8e7341;
   line-height: 1;
 }
@@ -315,7 +317,35 @@ body {
   color: #a6937c;
 }
 
-
+/* ================= REGOLE PER SMARTPHONE CON SCHERMI "CORTI" ================= */
+@media (max-height: 750px) {
+  .header-text { 
+    padding-top: 2vh; 
+    margin-bottom: 10px; 
+  }
+  .nomi { margin-bottom: 5px; }
+  .and-divider { 
+    margin: 5px 0; 
+    font-size: 20px; 
+  }
+  .data-container { margin: 8px 0; }
+  .location-container { margin-top: 15px; }
+  .location-text { margin-bottom: 4px; }
+  .maps-links { 
+    margin-top: 10px; 
+    gap: 20px; 
+  }
+  .bottom-content { 
+    gap: 10px; 
+    padding-bottom: 5px; 
+  }
+  
+  /* Se il telefono è davvero piccolissimo, lo scudo si riduce a un valore in pixel fisso. 
+     Se il contenuto totale sfora lo schermo, il telefono abiliterà lo scorrimento verso il basso. */
+  .middle-spacer { 
+    min-height: 250px; 
+  } 
+}
 </style>
 </head>
 
