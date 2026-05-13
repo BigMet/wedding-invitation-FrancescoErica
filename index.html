@@ -204,21 +204,29 @@ body {
 }
 
 
+/* --- BOTTONE RSVP (CONFERMA) --- */
 .btn-rsvp {
   display: inline-block;
-  background-color: #fdfaf5; 
+  /* Effetto Vetro: Bianco semitrasparente + Sfocatura */
+  background: rgba(253, 250, 245, 0.5); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
   padding: 15px 35px;
   border-radius: 50px; 
   text-decoration: none;
-  border: 1.5px solid #d6c3a3;
+  border: 1.5px solid rgba(214, 195, 163, 0.7); /* Bordo dorato leggero */
   font-family: 'Libre Baskerville', serif;
   font-size: 12px;
-  color: #555;
+  color: #444;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  
+  /* Mantengo il tuo margine originale */
   margin-bottom: 7px;
+  transition: all 0.3s ease;
 }
 
 #countdown {
@@ -231,12 +239,18 @@ body {
 .cd-number { display: block; font-size: 22px; font-weight: 600; color: #444; border-bottom: 1.5px solid #d6c3a3; }
 .cd-label { font-size: 8px; text-transform: uppercase; color: #666; }
 
+/* --- BOTTONE CALENDARIO --- */
 .btn-calendar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background-color: #5d7c6b;
+  
+  /* Effetto Vetro: Verde salvia semitrasparente */
+  background: rgba(93, 124, 107, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  
   color: white;
   border-radius: 30px;
   text-decoration: none;
@@ -245,7 +259,11 @@ body {
   letter-spacing: 1px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: -30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* RIPRISTINATO IL TUO MARGINE ORIGINALE */
+  margin-bottom: -30px; 
+  transition: all 0.3s ease;
 }
 
 .confetti {
@@ -342,6 +360,11 @@ body {
     padding-bottom: 5px; 
   }
   
+
+/* --- EFFETTI HOVER (OPZIONALI MA CONSIGLIATI) --- */
+.btn-rsvp:active { transform: scale(0.98); background: rgba(253, 250, 245, 0.8); }
+.btn-calendar:active { transform: scale(0.98); background: rgba(93, 124, 107, 0.9); }
+
   /* Se il telefono è davvero piccolissimo, lo scudo si riduce a un valore in pixel fisso. 
      Se il contenuto totale sfora lo schermo, il telefono abiliterà lo scorrimento verso il basso. */
   .middle-spacer { 
